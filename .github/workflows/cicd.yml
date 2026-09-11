@@ -65,9 +65,7 @@ jobs:
         uses: ServiceNow/sncicd-apply-changes@d9e560381b65fc450f8dc85b084c1a6cc40e503c  # 2.0.0, pinned 2026-08-07 LOOP-356 (node12 EOL mitigation)
         continue-on-error: true
         env:
-          nowSourceInstance: ${{ env.SN_INSTANCE }}
+          nowSourceInstance: ${{ secrets.SN_INSTANCE }}
           appScope: x_cd_grc_app
  
       # TODO: Add the ATF test suite step here (Part 1)
- 
-      # TODO: Add the instance scan step here (Part 2)
