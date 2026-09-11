@@ -1,25 +1,19 @@
 # Cloud Dimensions - ServiceNow CI/CD lab pipeline
-# Branch: main  (Lab 4 / Lesson 8 - Run an ATF Suite and Instance Scan in a Pipeline)
-# Starting state: this is the completed Lab 3 pipeline (the pre-written instance-resolution
-# step, job-level pipeline credentials, and the apply-changes step). Your task is to add
-# the ATF test suite step (Part 1) and the instance scan step (Part 2), each with its own
-# step-level env block.
+# Branch: lab2-start  (Lab 2 / Lesson 4 - Promote an Application via the CICD API)
+# Completed state: the pre-written instance-resolution step plus the apply changes
+# step you added, including its own env block (each sncicd action authenticates on
+# its own; there is no shared authenticate step in the real ServiceNow/sncicd-*
+# action family).
 name: CICD Pipeline
- 
 on:
   push:
-    branches: [main]
- 
+    branches: [lab2-start]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      nowUsername: ${{ secrets.SN_USERNAME }}
-      nowPassword: ${{ secrets.SN_PASSWORD }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
- 
       # Pre-written for you - you do not need to edit this step.
       # The sncicd-* actions build their request URL as
       # https://${nowSourceInstance}.service-now.com/api/... so they need the
@@ -60,14 +54,11 @@ jobs:
           esac
           echo "Resolved ServiceNow instance: $INSTANCE"
           echo "SN_INSTANCE=$INSTANCE" >> "$GITHUB_ENV"
- 
       - name: Apply changes
-        uses: ServiceNow/sncicd-apply-changes@d9e560381b65fc450f8dc85b084c1a6cc40e503c  # 2.0.0, pinned 2026-08-07 LOOP-356 (node12 EOL mitigation)
+        uses: ServiceNow/sncicd-apply-changes@2.0.0
         continue-on-error: true
         env:
-          nowSourceInstance: ${{ env.SN_INSTANCE }}
+          nowUsername: ${{ secrets.SN_USERNAME }}
+          nowPassword: ${{ secrets.SN_PASSWORD }}
+          nowSourceInstance: ${{ env.SN_INSTANCE_DOMAIN }}
           appScope: x_cd_grc_app
- 
-      # TODO: Add the ATF test suite step here (Part 1)
- 
-      # TODO: Add the instance scan step here (Part 2)
