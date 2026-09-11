@@ -62,13 +62,11 @@ jobs:
           echo "SN_INSTANCE=$INSTANCE" >> "$GITHUB_ENV"
  
       - name: Apply changes
-  uses: ServiceNow/sncicd-apply-changes@d9e560381b65fc450f8dc85b084c1a6cc40e503c
-  continue-on-error: true
-  env:
-    nowSourceInstance: nowlearning-nlinst04664085-8sclf-0001.lab
-    appScope: x_cd_grc_app
-    nowUsername: ${{ secrets.SN_USERNAME }}
-    nowPassword: ${{ secrets.SN_PASSWORD }}
+        uses: ServiceNow/sncicd-apply-changes@d9e560381b65fc450f8dc85b084c1a6cc40e503c  # 2.0.0, pinned 2026-08-07 LOOP-356 (node12 EOL mitigation)
+        continue-on-error: true
+        env:
+          nowSourceInstance: ${{ env.SN_INSTANCE }}
+          appScope: x_cd_grc_app
  
       # TODO: Add the ATF test suite step here (Part 1)
  
