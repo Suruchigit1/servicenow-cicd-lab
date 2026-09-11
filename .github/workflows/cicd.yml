@@ -60,5 +60,5 @@ jobs:
         env:
           nowUsername: ${{ secrets.SN_USERNAME }}
           nowPassword: ${{ secrets.SN_PASSWORD }}
-          nowSourceInstance: ${{ secrets.SN_INSTANCE }}
+          nowSourceInstance: ${{ secrets.NOW_SOURCE_INSTANCE }}
           appScope: x_cd_grc_app
