@@ -38,12 +38,12 @@ jobs:
 
           echo "Resolved ServiceNow instance: $INSTANCE"
           echo "SN_INSTANCE=$INSTANCE" >> "$GITHUB_ENV"
-
+               
       - name: Apply changes
         uses: ServiceNow/sncicd-apply-changes@master
         continue-on-error: true
         env:
-          nowSourceInstance: ${{ env.SN_INSTANCE }}
+          nowSourceInstance: ${{ vars.SN_INSTANCE_DOMAIN }}
           nowUsername: ${{ secrets.SN_USERNAME }}
           nowPassword: ${{ secrets.SN_PASSWORD }}
           appScope: x_cd_grc_app
