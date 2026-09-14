@@ -69,5 +69,16 @@ jobs:
           appScope: x_cd_grc_app
 
       # TODO: Add the ATF test suite step here (Part 1)
-
+      - name: Run ATF test suite
+        uses: ServiceNow/sncicd-tests-run@2.0.0
+        with:
+          testSuiteSysId: 90f283440db503107f44aad64471050b
+        env:
+          nowInstallInstance: ${{ env.SN_INSTANCE }}
       # TODO: Add the instance scan step here (Part 2)
+      - name: Run ATF test suite
+        uses: ServiceNow/sncicd-tests-run@2.0.0
+        with:
+          testSuiteSysId: 90f283440db503107f44aad64471050b
+        env:
+          nowInstallInstance: ${{ env.SN_INSTANCE }}
