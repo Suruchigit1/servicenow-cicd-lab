@@ -4,6 +4,7 @@
 # step, job-level pipeline credentials, and the apply-changes step). Your task is to add
 # the ATF test suite step (Part 1) and the instance scan step (Part 2), each with its own
 # step-level env block.
+# Updated: ATF test fixed for refactored GRC application
 name: CICD Pipeline
 
 on:
